@@ -1,0 +1,32 @@
+	int h[];
+	public  int[] diameter2(int[][] g)
+	{
+		int f0=-1,f1=-1,d0=-1,max=-1;
+		h=new int[g.length];
+		dfs(g,0,-1);
+		for(int i=0;i<g.length;i++)
+			if(h[i]>max)
+			{
+				max=h[i];
+				f0=i;
+			}
+		Arrays.fill(h, 0);
+		dfs(g,f0,-1);
+		max=-1;
+		for(int i=0;i<g.length;i++)
+			if(h[i]>max)
+			{
+				max=h[i];
+				f1=i;
+			}
+		return new int[] {max,f0,f1};
+	}
+	void dfs(int g[][],int u,int p)
+	{
+		for(int i:g[u])
+		{
+			if(i==p)continue;
+			h[i]=h[u]+1;
+			dfs(g,i,u);
+		}
+	}
